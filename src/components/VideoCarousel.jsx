@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { hightlightsSlides } from "../constants";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 import { pauseImg, playImg, replayImg } from "../utils";
 
@@ -31,7 +31,7 @@ const VideoCarousel = () => {
             ease: 'power2.inOut'
         })
         gsap.to('#video', {
-            scollTrigger: {
+            scrollTrigger: {
                 trigger: '#video',
                 toggleActions: 'restart none none none'
             },
@@ -83,7 +83,7 @@ const VideoCarousel = () => {
                 },
 
                 onComplete: () => {
-                    if(isPlaying) {
+                    if (isPlaying) {
                         gsap.to(videoDivRef.current[videoId], {
                             width: '12px'
                         })
@@ -105,7 +105,7 @@ const VideoCarousel = () => {
                 gsap.ticker.add(animUpdate);
             } else {
                 // remove the ticker when the video is paused (progress bar is stopped)
-                gsap.ticket.remove(animUpdate);
+                gsap.ticker.remove(animUpdate);
             }
         }
     }, [videoId, startPlay])
@@ -144,9 +144,8 @@ const VideoCarousel = () => {
                                     playsInline={true}
                                     muted
                                     preload='auto'
-                                    className={`${
-                                        slide.id === 2 && "translate-x-44"
-                                    } pointer-events-none`}
+                                    className={`${slide.id === 2 && "translate-x-44"
+                                        } pointer-events-none`}
                                     ref={(el) => { videoRef.current[i] = el }}
                                     onPlay={() => {
                                         setVideo((prevVideo) => ({
