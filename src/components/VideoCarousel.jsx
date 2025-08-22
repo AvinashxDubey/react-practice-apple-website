@@ -101,8 +101,10 @@ const VideoCarousel = () => {
             }
 
             if (isPlaying) {
+                // ticker to update the progress bar
                 gsap.ticker.add(animUpdate);
             } else {
+                // remove the ticker when the video is paused (progress bar is stopped)
                 gsap.ticket.remove(animUpdate);
             }
         }
@@ -142,6 +144,9 @@ const VideoCarousel = () => {
                                     playsInline={true}
                                     muted
                                     preload='auto'
+                                    className={`${
+                                        slide.id === 2 && "translate-x-44"
+                                    } pointer-events-none`}
                                     ref={(el) => { videoRef.current[i] = el }}
                                     onPlay={() => {
                                         setVideo((prevVideo) => ({
